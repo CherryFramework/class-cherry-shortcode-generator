@@ -6,13 +6,10 @@
 
 	function genereateShortcode( $target ) {
 
-		var mask      = $target.data( 'input_mask' ),
-			shortcode = $target.data( 'shortcode' ),
+		var shortcode = $target.data( 'shortcode' ),
 			sType     = $target.data( 'type' ),
 			$attrForm = $( '.cherry-sg-popup_fields', $target ),
 			atts      = $attrForm.serializeArray(),
-			attName,
-			val,
 			result;
 
 		result = '[' + shortcode;
@@ -24,7 +21,7 @@
 		result += ']';
 
 		if ( 'single' !== sType ) {
-			result += '[/' + shortcode + ']'
+			result += '[/' + shortcode + ']';
 		}
 
 		return result;
@@ -39,7 +36,7 @@
 
 		var initDone = false;
 
-		$('.cherry-sg-open').magnificPopup({
+		$( '.cherry-sg-open' ).magnificPopup({
 			type: 'inline',
 			preloader: false,
 			focus: '#name',
