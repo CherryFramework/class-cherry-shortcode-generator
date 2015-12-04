@@ -4,30 +4,21 @@
 ( function( $ ) {
 	'use strict';
 
-	function genereateShortcode( target ) {
+	function genereateShortcode( $target ) {
 
-		var mask               = target.data( 'input_mask' ),
-			shortcode          = target.data( 'shortcode' ),
-			sType              = target.data( 'type' ),
+		var mask      = $target.data( 'input_mask' ),
+			shortcode = $target.data( 'shortcode' ),
+			sType     = $target.data( 'type' ),
+			$attrForm = $( '.cherry-sg-popup_fields', $target ),
+			atts      = $attrForm.serializeArray(),
 			attName,
 			val,
 			result;
 
 		result = '[' + shortcode;
 
-		$( '*[id^=' + mask + ']', target ).each( function() {
-
-			val     = $(this).val();
-			attName = $( this ).attr( 'name' );
-			attName = attName.replace( /\[\]/g, '' );
-
-			console.log( attName );
-			console.log( val );
-
-			if ( null !== val ) {
-				result += ' ' + attName + '="' + val + '"';
-			}
-
+		$.each( atts, function( index, val ) {
+			result += ' ' + val.name.replace( /\[\]/g, '' ) + '="' + val.value + '"';
 		});
 
 		result += ']';
@@ -39,7 +30,15 @@
 		return result;
 	}
 
+	function pasteShortcode( $target, $result ) {
+		var shortcode = genereateShortcode( $target );
+		$result.val( shortcode );
+	}
+
 	$( window ).load( function() {
+
+		var initDone = false;
+
 		$('.cherry-sg-open').magnificPopup({
 			type: 'inline',
 			preloader: false,
@@ -47,25 +46,31 @@
 			callbacks: {
 				open: function() {
 
-					var shortcode,
-						resultShortcode = $( '#generated-shortcode', this.content ),
-						target          = this.content;
+					var $resultShortcode = $( '#generated-shortcode', this.content ),
+						$target          = this.content;
+
+					if ( initDone ) {
+						return true;
+					}
+
+					initDone = true;
 
 					// Init UI elements
-					$( window ).trigger( 'cherry-ui-elements-init', { 'target': target } );
-					shortcode = genereateShortcode( this.content );
+					$( window ).trigger( 'cherry-ui-elements-init', { 'target': $target } );
 
-					resultShortcode.val( shortcode );
+					pasteShortcode( $target, $resultShortcode );
 
-					this.content.on( 'change blur', function() {
-						shortcode = genereateShortcode( target );
-						resultShortcode.val( shortcode );
+					$target.on( 'change blur', function() {
+						pasteShortcode( $target, $resultShortcode );
 					});
 
-					this.content.on( 'click', '.cherry-switcher-wrap', function() {
-						shortcode = genereateShortcode( target );
-						resultShortcode.val( shortcode );
+					$target.on( 'click', '.cherry-switcher-wrap', function() {
+						pasteShortcode( $target, $resultShortcode );
 					});
+
+					$( '.cherry-slider-unit' ).on( 'slidechange', function() {
+						pasteShortcode( $target, $resultShortcode );
+					} );
 
 				}
 			}

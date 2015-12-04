@@ -4,8 +4,8 @@
  *
  * Instructions:
  * 1. This class MUST be included only on page where you wanna to add 'generate shortcode' button
- * 2. You need to pass 2 required variables - $base_dir, $base_url and $plugin - path and URL to class-cherry-shortcode-generator in your plugin and current plugin slug, without it this class useless
- * 3. Recommended to include this class on
+ * 2. You need to pass 3 required variables - $base_dir, $base_url and $plugin - path and URL to class-cherry-shortcode-generator in your plugin and current plugin slug, without it this class useless
+ * 3. Recommended to include and initalize this class on 'admin_init' hook with current page checking
  * 4. On page, where you need to show generate shortcode button, add next code <?php do_action( 'cherry_shortcode_generator_buttons' ); ?>
  * 5. Register shortcode for generator with 'cherry_shortcode_generator_register' filter
  *
@@ -233,7 +233,7 @@ if ( ! class_exists( 'Cherry_Shortcode_Generator' ) ) {
 			$data_atts = $this->prepare_data_atts_string( $data_atts );
 
 			printf(
-				'<div class="cherry-sg-popup white-popup-block mfp-hide" id="sg-%3$s" %4$s><div class="cherry-sg-popup_fields">%1$s</div>%2$s</div>',
+				'<div class="cherry-sg-popup white-popup-block mfp-hide" id="sg-%3$s" %4$s><form class="cherry-sg-popup_fields">%1$s</form>%2$s</div>',
 				$fields, $input, $shortcode['slug'], $data_atts
 			);
 

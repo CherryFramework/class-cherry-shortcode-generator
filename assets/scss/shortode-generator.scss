@@ -1,7 +1,7 @@
 .white-popup-block {
 	background: #fff none repeat scroll 0 0;
 	margin: 35px auto;
-	max-width: 650px;
+	max-width: 700px;
 	padding: 20px 30px;
 	position: relative;
 	text-align: left;
@@ -13,7 +13,55 @@
 }
 
 .cherry-sg-item {
-	margin: 0 0 15px 0;
+	margin: 0 0 20px;
+	box-sizing: border-box;
+	padding: 0 10px;
+	width: 50%;
+	-webkit-flex: 0 1 50%;
+	-ms-flex: 0 1 50%;
+	flex: 0 1 50%;
+	-webkit-align-self: auto;
+	-ms-flex-item-align: auto;
+	align-self: auto;
+	.cherry-slider-wrap {
+		.cherry-slider-input {
+			width: 25%;
+		}
+		.cherry-slider-holder {
+			width: 75%;
+		}
+	}
+	.cherry-ui-stepper-input {
+		max-width: 86px;
+	}
+}
+
+.cherry-sg-shortcode {
+	border-top: 1px solid #eee;
+	padding: 20px 0 10px;
+}
+.cherry-sg-popup {
+	&_fields {
+		margin: 0 -10px;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-flex-direction: row;
+		-ms-flex-direction: row;
+		flex-direction: row;
+		-webkit-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		-webkit-justify-content: flex-start;
+		-ms-flex-pack: start;
+		justify-content: flex-start;
+		-webkit-align-content: stretch;
+		-ms-flex-line-pack: stretch;
+		align-content: stretch;
+		-webkit-align-items: flex-start;
+		-ms-flex-align: start;
+		align-items: flex-start;
+	}
 }
 
 /* Magnific Popup CSS */
