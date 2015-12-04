@@ -1,0 +1,12 @@
+{
+	"preset": "wordpress",
+	"fileExtensions": [ ".js" ],
+	"excludeFiles": [
+		"ui/",
+		"*.min.js",
+		"*.min.css",
+		"assets/js/min/shortode-generator.min.js",
+		"assets/js/jquery.magnific-popup.js",
+		"assets/js/min/jquery.magnific-popup.min.js"
+	]
+}
